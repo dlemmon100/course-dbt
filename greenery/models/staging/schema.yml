@@ -2,4 +2,57 @@ version: 2
 
 models:
    - name: stg_users
-   - name: stg_superheroes
+     description: "User Staging Model"
+     columns:
+       - name: user_guid
+         description: "Primary key for this model"
+         tests:
+            - unique
+            - not_null
+   - name: stg_orders
+     description: "Orders Staging Model"
+     columns:
+       - name: order_guid
+         description: "Primary key for this model"
+         tests:
+            - unique
+            - not_null
+   - name: stg_events
+     description: "Events Staging Model"
+     columns:
+       - name: event_guid
+         description: "Primary key for this model"
+         tests: 
+            - unique
+            - not_null
+   - name: stg_order_items
+     description: "Order Item Staging Model"
+     tests: 
+       - dbt_utils.unique_combination_of_columns:
+            combination_of_columns: 
+               - order_guid
+               - product_guid
+   - name: stg_products
+     description: "Products Staging Model"
+     columns:
+       - name: product_guid
+         description: "Primary key for this model"
+         tests:
+            - unique
+            - not_null
+   - name: stg_promos
+     description: "Promos Staging Model"
+     columns:
+       - name: promo_id
+         description: "Primary key for this model"
+         tests:
+            - unique
+            - not_null
+   - name: stg_addresses
+     description: "Addresses Staging Model"
+     columns:
+       - name: address_guid
+         description: "Primary key for this model"
+         tests:
+            - unique
+            - not_null

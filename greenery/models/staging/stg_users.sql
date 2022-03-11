@@ -19,4 +19,4 @@ renamed as (
 
 )
 
-select * from users
+select * from renamed
