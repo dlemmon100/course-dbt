@@ -6,8 +6,8 @@ renamed as (
 
     select
         user_id as user_guid,
-        first_name,
-        last_name,
+        initcap(first_name) as first_name,
+        initcap(last_name) as last_name,
         email,
         phone_number,
         created_at as created_at_utc,
