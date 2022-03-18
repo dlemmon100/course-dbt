@@ -21,6 +21,8 @@ sources:
         description: >
           Contains demographic information about each superhero
       - name: addresses
+        description: >
+          Contains address information such as street name, city, state, and zip code.
       - name: events
       - name: order_items
       - name: orders
