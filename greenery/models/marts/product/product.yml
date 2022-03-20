@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: fct_page_views
+    description: "Fact table for page view information."
+    columns:
+      - name: user_guid
+        tests:
+          - not_null

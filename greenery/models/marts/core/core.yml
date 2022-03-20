@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_users
+    description: "User Dimension Model"
+    columns:
+      - name: user_guid
+        description: "Primary Key of this model."
+        tests:
+          - unique
+          - not_null
+  - name: dim_products
+    description: "Product Dimension Model"
+    columns:
+      - name: product_guid
+        description: "Primary Key of this model."
+        tests:
+          - unique
+          - not_null
+  - name: fct_orders
+    description: "Order fact table"
+    columns:
+      - name: order_guid
+        description: "Primary Key of this model."
+        tests:
+          - unique
+          - not_null
