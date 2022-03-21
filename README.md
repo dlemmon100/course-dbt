@@ -1,3 +1,79 @@
+# Project 2 Questions
+
+#### 1: What is our repeat user rate?
+- 79.84%
+
+``` sql 
+with orders as (
+  select * from dbt_dylan_l.stg_orders
+),
+
+user_orders as (
+  select 
+    user_guid,
+    count(distinct order_guid) as user_orders
+    
+  from orders 
+  
+  group by user_guid
+),
+
+multiple_purchases as (
+  select 
+    count(user_guid) as user_count,
+    sum(case 
+          when user_orders > 1 
+            then 1
+            else 0 
+        end) as multiple_purchases
+  
+  from user_orders
+)
+
+select round((multiple_purchases / user_count::numeric) * 100, 2) as repeat_rate
+from multiple_purchases
+```
+#### 2: What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
+
+Indicators of users likely to purchase again:
+- Users that have ordered more than once. 
+- Users products were delivered in a timely fashion.
+- Users that are ordering in bulk. (Perhaps for a business purpose)
+- Users with recurring orders.
+
+Indicators of users likely not to purchase again:
+- Users with poor delivery times.
+- Users that have never added anything to their carts.
+- Users that have never purchased anything.
+- Users that have not purchased in a long time.
+
+If you had more data what features would you want to look into to answer this questions?
+- Competitor prices on similar products.
+- Whether users are making purchases for personal or business reasons. 
+
+#### 3: Explain the mart models you added. Why did you organize the models in the way you did?
+- Core: High level details about the essential functions of the business - revenue, cost and performance.
+**dim_products**: Shows details about the products - can be joined to from fact models. 
+**dim_users**: User detail dimensional model that can be joined to from fact tables to gather more information on the users.
+**fct_orders**: Fact table that provides information about an order, the customer that purchased the order and shipping information.
+
+- Marketing: Data that can be used to improve marketing tactics. 
+**int_user_orders**: Performs light transformations to see user order summary information such as purchase and spending trends.
+**fct_user_orders**: Shows details of users and their historical orders.
+
+- Producs: Data the business can use to see general product information.
+**fct_page_views**: Shows data about which users are visiting which pages the most frequently. 
+
+#### 4: What assumptions are you making about each model? 
+- Each model is going to have a unique, not null primary key.
+- Revenue & cost values should be positive.
+
+#### 5: Did you find any "bad" data as you added and ran tests on your models?
+- No, all of the tests I have implemented on models are passing.
+
+#### 6: Your stakeholders at Greenery want to understand the state of the data each day. Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
+- We are currently working through discussions about how to best handle this at our company. It wouldn't be a bad idea to build dbt models that report failing test data that can be used in a BI tool or reporting tool that can send the report on a subscription.
+
 # Project 1 Questions
 
 #### 1: How many users do we have?
