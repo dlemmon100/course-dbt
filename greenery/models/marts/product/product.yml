@@ -2,8 +2,14 @@ version: 2
 
 models:
   - name: fct_page_views
-    description: "Fact table for page view information."
+    description: "Fact table for page view information by user."
+    tests: 
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - user_guid
+            - page_url
     columns:
-      - name: user_guid
+      - name: number_of_views
+        description: "Number of times the user has viewed the page."
         tests:
-          - not_null
+          - positive_values

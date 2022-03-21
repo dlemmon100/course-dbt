@@ -25,3 +25,15 @@ models:
         tests:
           - unique
           - not_null
+      - name: order_cost
+        description: "Order cost."  
+        tests:
+          - positive_values
+      - name: shipping_cost
+        description: "Order shipping cost."
+        tests: 
+          - positive_values
+      - name: order_total
+        description: "Order cost and shipping cost combined."
+        tests:
+          - positive_values

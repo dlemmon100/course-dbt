@@ -9,5 +9,19 @@ models:
         tests:
           - unique
           - not_null
+      - name: avg_delivery_time
+        description: "Average user order delivery time."
+      - name: total_shipping_spend
+        description: "Total user shipping cost."
+        tests:
+          - positive_values
+      - name: total_order_spend
+        description: "Total user order cost."
+        tests:
+          - positive_values
+      - name: total_spend 
+        description: "Total user order cost and shipping cost."
+        tests:
+          - positive_values
   - name: int_user_orders
     description: "Intermediate table showing user order information."

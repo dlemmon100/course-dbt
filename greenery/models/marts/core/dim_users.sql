@@ -1,9 +1,3 @@
-{{
-    config(
-        materialized = 'table'
-    )
-}}
-
 with stg_users as (
     select * from {{ ref('stg_users') }}
 ),
