@@ -1,0 +1,17 @@
+version: 2
+
+macros:
+  - name: positive_values
+    description: Tests for negative values.
+    arguments:
+      - name: model
+        description: Name of the model
+      - name: column_name
+        description: Column being tested for negative values. 
+  - name: sessions_per_event
+    description: Counts unique sessions by event.
+    arguments: 
+      - name: column_name
+        description: Column being used to summarize the event type.
+      - name: event_type
+        description: Specific event type being summarized. 
