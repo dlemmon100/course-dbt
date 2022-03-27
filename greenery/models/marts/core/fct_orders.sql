@@ -90,6 +90,11 @@ final as (
         created_at_utc,
         estimated_delivery_at_utc,
         delivered_at_utc,
+        case 
+            when delivered_at_utc <= estimated_delivery_at_utc
+                then 'On Time'
+            else 'Late'
+        end as order_delivery_status,
         order_status,
         distinct_products,
         total_order_item_count,

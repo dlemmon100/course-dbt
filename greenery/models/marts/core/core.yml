@@ -19,6 +19,13 @@ models:
           - not_null
   - name: fct_orders
     description: "Order fact table"
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "order_cost + shipping_cost = order_total"
+          condition: discount = null
+      - dbt_utils.expression_is_true:
+          expression: "order_cost + shipping_cost - discount = order_total"
+          condition: discount <> null
     columns:
       - name: order_guid
         description: "Primary Key of this model."

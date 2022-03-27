@@ -13,3 +13,11 @@ models:
         description: "Number of times the user has viewed the page."
         tests:
           - positive_values
+
+  - name: fct_sessions
+    description: "Fact table for session information."
+    tests: 
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - user_guid
+            - page_url
